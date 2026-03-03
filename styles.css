@@ -547,3 +547,81 @@ video{
   .modal-backdrop, .modal-panel{ animation:none; opacity:1; transform:none; }
   .hero-avatar-wrap{ transition:none; }
 }
+
+
+/* test */
+/* ===== GPA highlight ===== */
+.gpa-card{
+  position: relative;
+  overflow: hidden;
+}
+
+.gpa-card:before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(520px 220px at 25% 15%, rgba(125,211,252,.22), transparent 60%),
+    radial-gradient(520px 220px at 85% 65%, rgba(167,139,250,.18), transparent 60%);
+  opacity:.9;
+  pointer-events:none;
+}
+
+.gpa-grid{
+  position: relative;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+  margin-top:10px;
+}
+@media (max-width: 760px){
+  .gpa-grid{ grid-template-columns: 1fr; }
+}
+
+.gpa-tile{
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.04);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.gpa-label{
+  color: rgba(255,255,255,.70);
+  font-size: 12px;
+  letter-spacing: .2px;
+}
+
+.gpa-value{
+  font-size: 32px;
+  font-weight: 850;
+  line-height: 1.05;
+  margin-top: 6px;
+}
+
+.gpa-meta{
+  color: rgba(255,255,255,.62);
+  font-size: 12.5px;
+  margin-top: 6px;
+}
+
+.gpa-note{
+  position: relative;
+  margin-top: 12px;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+}
+
+/* Inline GPA pill inside list */
+.gpa-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 4px 10px;
+  margin-left: 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(125,211,252,.35);
+  background: linear-gradient(135deg, rgba(125,211,252,.16), rgba(167,139,250,.14));
+  color: rgba(255,255,255,.92);
+  font-weight: 750;
+  font-size: 12.5px;
+}
