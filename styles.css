@@ -1093,3 +1093,8 @@ video {
     font-size: 12px;
   }
 }
+
+.video-stack{
+  display:flex;
+  flex-direction:column;
+}
