@@ -1,16 +1,44 @@
 :root {
-  --bg: #0b0f16;
-  --card: rgba(255, 255, 255, .06);
+  --bg: #090d14;
+  --card: rgba(255, 255, 255, .055);
   --card2: rgba(255, 255, 255, .10);
-  --text: rgba(255, 255, 255, .92);
-  --muted: rgba(255, 255, 255, .72);
-  --faint: rgba(255, 255, 255, .55);
-  --line: rgba(255, 255, 255, .14);
+  --text: rgba(255, 255, 255, .93);
+  --muted: rgba(255, 255, 255, .74);
+  --faint: rgba(255, 255, 255, .56);
+  --line: rgba(255, 255, 255, .13);
+
   --accent: #7dd3fc;
   --accent2: #a78bfa;
+  --accent-ink: #06121a;
+
+  /* ambient background glows — retinted per page theme */
+  --glow1: rgba(125, 211, 252, .20);
+  --glow2: rgba(167, 139, 250, .18);
+  --glow3: rgba(134, 239, 172, .10);
+
   --shadow: 0 18px 60px rgba(0, 0, 0, .45);
   --radius: 18px;
-  --max: 1040px;
+  --max: 1100px;
+  --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Page themes — set with <body data-accent="..."> on the tailored pages */
+body[data-accent="adify"] {
+  --accent: #7fb2ff;
+  --accent2: #9d8bff;
+  --accent-ink: #060d1c;
+  --glow1: rgba(127, 178, 255, .22);
+  --glow2: rgba(157, 139, 255, .17);
+  --glow3: rgba(56, 189, 248, .10);
+}
+
+body[data-accent="highlands"] {
+  --accent: #f2ab6b;
+  --accent2: #e07a5f;
+  --accent-ink: #1c0d06;
+  --glow1: rgba(242, 171, 107, .20);
+  --glow2: rgba(224, 122, 95, .17);
+  --glow3: rgba(212, 163, 115, .10);
 }
 
 * {
@@ -29,14 +57,17 @@ html {
 
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  font-family: var(--font);
   color: var(--text);
   background:
-    radial-gradient(1100px 600px at 20% -10%, rgba(125, 211, 252, .20), transparent 60%),
-    radial-gradient(900px 500px at 90% 10%, rgba(167, 139, 250, .18), transparent 55%),
-    radial-gradient(900px 700px at 30% 110%, rgba(134, 239, 172, .10), transparent 60%),
+    radial-gradient(1100px 600px at 20% -10%, var(--glow1), transparent 60%),
+    radial-gradient(900px 500px at 90% 10%, var(--glow2), transparent 55%),
+    radial-gradient(900px 700px at 30% 110%, var(--glow3), transparent 60%),
     var(--bg);
-  line-height: 1.55;
+  background-attachment: fixed;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -1097,4 +1128,648 @@ video {
 .video-stack{
   display:flex;
   flex-direction:column;
+}
+/* =========================================================
+   UI v2 — components added for the tailored application pages
+   (scroll progress, target banner, stat tiles, fit matrix,
+    timeline, section headers, CTA bar)
+   ========================================================= */
+
+/* ---------- Scroll progress ---------- */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 50;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 12px var(--accent);
+  transition: width .08s linear;
+}
+
+/* ---------- Nav polish ---------- */
+.nav-links {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-links a {
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+
+@media (max-width: 720px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .nav-links {
+    width: 100%;
+    padding-bottom: 2px;
+  }
+}
+
+/* ---------- Section headers ---------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+.section h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.2px;
+  line-height: 1.25;
+}
+
+@media (max-width: 480px) {
+  .section h2 {
+    font-size: 19px;
+  }
+}
+
+/* ---------- Target banner (which company this page is for) ---------- */
+.target-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 13px 16px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  background:
+    linear-gradient(90deg,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      color-mix(in srgb, var(--accent2) 7%, transparent));
+}
+
+.target-banner .tb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.target-banner .tb-role {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.target-banner .tb-co {
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.target-banner .tb-spacer {
+  flex: 1;
+}
+
+/* ---------- Stat tiles ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+@media (max-width: 860px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat {
+  padding: 14px 14px 12px;
+  border-radius: 15px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: var(--card2);
+}
+
+.stat .s-val {
+  display: block;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.5px;
+  background: linear-gradient(120deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.stat .s-delta {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat .s-lab {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
+/* ---------- Timeline (experience) ---------- */
+.tl {
+  position: relative;
+  padding-left: 22px;
+}
+
+.tl::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent2) 55%, transparent), transparent);
+}
+
+.tl-item {
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.tl-role {
+  font-weight: 700;
+  font-size: 15.5px;
+}
+
+.tl-org {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tl-time {
+  font-size: 12.5px;
+  color: var(--faint);
+  margin: 2px 0 6px;
+}
+
+/* ---------- Buttons ---------- */
+.btn.primary {
+  background: linear-gradient(120deg, var(--accent), var(--accent2));
+  color: var(--accent-ink);
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.08);
+  text-decoration: none;
+}
+
+.btn:focus-visible,
+.p-link:focus-visible,
+.nav-links a:focus-visible,
+.media-item:focus-visible,
+.video-dl:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* ---------- Note / callout ---------- */
+.note {
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 255, 255, .035);
+  padding: 12px 14px;
+  border-radius: 0 12px 12px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.note b {
+  color: var(--text);
+}
+
+/* ---------- Project card: accent bar that grows on hover ----------
+   Grid/flex layout for .grid-projects is defined in the PROJECT GRID
+   section above; only the accent treatment is added here. */
+.project {
+  position: relative;
+  overflow: hidden;
+}
+
+.project::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .22s ease;
+}
+
+.project:hover::after,
+.project:focus-within::after {
+  transform: scaleY(1);
+}
+
+/* ---------- Pills / chips using the theme accent ---------- */
+.pill {
+  border-color: color-mix(in srgb, var(--accent) 26%, var(--line));
+}
+
+.chip:hover,
+.tag:hover {
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+  color: var(--text);
+}
+
+/* ---------- Sticky bottom CTA (tailored pages) ---------- */
+.cta-bar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 20;
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  background: rgba(12, 17, 26, .88);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.cta-bar .cb-text {
+  font-size: 14px;
+  color: var(--muted);
+  flex: 1 1 220px;
+}
+
+.cta-bar .cb-text b {
+  color: var(--text);
+}
+
+/* ---------- Print ---------- */
+@media print {
+
+  .progress,
+  .cta-bar,
+  .nav-links {
+    display: none !important;
+  }
+
+  .stat,
+  .fit,
+  .target-banner {
+    border-color: #ccc;
+    background: #fff;
+    color: #000;
+  }
+
+  .stat .s-val {
+    color: #000;
+    -webkit-text-fill-color: #000;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .stat,
+  .project,
+  .project::after,
+  .progress {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   UI v3 — fluid type, spacing rhythm and responsive fixes.
+   Loaded last so it wins over the earlier fixed-size rules.
+   ========================================================= */
+
+/* ---------- Fluid shell ---------- */
+.container {
+  padding: clamp(18px, 2.6vw, 32px) clamp(14px, 3vw, 26px) clamp(60px, 8vw, 96px);
+}
+
+.hero {
+  padding: clamp(24px, 4.5vw, 52px) 0 clamp(16px, 2vw, 24px);
+}
+
+.hero-main {
+  padding: clamp(20px, 2.8vw, 32px);
+}
+
+.hero-side {
+  padding: clamp(14px, 1.8vw, 20px);
+  gap: clamp(9px, 1.1vw, 13px);
+}
+
+.card {
+  border-radius: clamp(14px, 1.5vw, 20px);
+  backdrop-filter: blur(2px);
+}
+
+.block {
+  padding: clamp(15px, 2vw, 22px);
+}
+
+.project {
+  padding: clamp(15px, 1.9vw, 21px);
+}
+
+/* ---------- Fluid type ---------- */
+.h-title {
+  font-size: clamp(30px, 4.6vw, 46px);
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.h-sub {
+  font-size: clamp(14.5px, 1.35vw, 17px);
+  max-width: 56ch;
+}
+
+.section {
+  margin-top: clamp(26px, 3.8vw, 46px);
+  scroll-margin-top: 96px;
+}
+
+.section h2 {
+  font-size: clamp(19px, 2.1vw, 25px);
+  text-wrap: balance;
+  margin-bottom: 14px;
+}
+
+.section .sub {
+  max-width: 72ch;
+}
+
+.block h3,
+.p-title {
+  text-wrap: balance;
+}
+
+/* ---------- Nav: one scrollable row, stacked on small screens ---------- */
+.nav-inner {
+  padding: 11px clamp(14px, 3vw, 26px);
+}
+
+.brand {
+  flex-wrap: wrap;
+  row-gap: 6px;
+  min-width: 0;
+}
+
+.nav-links {
+  flex-wrap: nowrap;
+  gap: 4px;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 900px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
+
+  .section {
+    scroll-margin-top: 112px;
+  }
+}
+
+/* ---------- Overflow guards ---------- */
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+.kv .v,
+.p-title,
+.tb-co,
+.footer a {
+  overflow-wrap: break-word;
+}
+
+/* ---------- Stats on small screens ---------- */
+@media (max-width: 620px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat {
+    padding: 12px 12px 10px;
+  }
+
+  .stat .s-val {
+    font-size: 22px;
+  }
+
+  .stat .s-lab {
+    font-size: 11.5px;
+  }
+}
+
+/* ---------- Target banner + sticky CTA on small screens ---------- */
+@media (max-width: 640px) {
+  .target-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .target-banner .tb-spacer {
+    display: none;
+  }
+
+  .target-banner .btn {
+    width: 100%;
+  }
+
+  /* Compact one-row sticky bar on phones — the label is redundant there,
+     and a three-row bar would cover most of the viewport. */
+  .cta-bar {
+    bottom: 8px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .cta-bar .cb-text {
+    display: none;
+  }
+
+  .cta-bar .btn {
+    flex: 1 1 0;
+    padding: 10px 8px;
+  }
+}
+
+/* ---------- Hero avatar + meta on small screens ---------- */
+@media (max-width: 520px) {
+  .meta-row .pill,
+  .brand .pill {
+    font-size: 11.5px;
+    padding: 5px 9px;
+  }
+
+  .cta .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ---------- Card polish ---------- */
+.card {
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.block:hover,
+.hero-side:hover {
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
+}
+
+.hero-main:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+      color-mix(in srgb, var(--accent) 55%, transparent),
+      transparent 40%,
+      transparent 60%,
+      color-mix(in srgb, var(--accent2) 45%, transparent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: .7;
+}
+
+/* ---------- Chips / tags legibility ---------- */
+.chip,
+.tag {
+  transition: border-color .16s ease, color .16s ease, background .16s ease;
+}
+
+.chip {
+  font-size: 12.5px;
+  padding: 7px 11px;
+}
+
+/* ---------- Timeline spacing ---------- */
+.tl-item ul {
+  margin-top: 2px;
+}
+
+.tl-item li {
+  margin: 5px 0;
+}
+
+/* ---------- Lists ---------- */
+.block ul,
+.project ul {
+  font-size: 14px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: clamp(28px, 4vw, 48px);
+  padding-top: 18px;
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: color-mix(in srgb, var(--accent) 40%, transparent);
+  color: #fff;
+}
+
+/* ---------- Nicer scrollbar (desktop) ---------- */
+@media (min-width: 900px) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--accent) 45%, transparent) transparent;
+  }
+}
+
+/* ---------- Nav scroll affordance: fade the right edge on small screens ---------- */
+@media (max-width: 900px) {
+  .nav-links {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    padding-right: 22px;
+  }
 }

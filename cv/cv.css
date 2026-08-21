@@ -1,0 +1,197 @@
+/* =========================================================
+   CV print stylesheet — Văn Thị Thu Hương
+   Rendered to PDF via: msedge --headless=new --print-to-pdf
+   Accent color is set per-file with --accent on <body data-theme>.
+   ========================================================= */
+
+@page {
+  size: A4;
+  margin: 8.5mm 10mm;
+}
+
+:root {
+  --ink: #16191f;
+  --ink-soft: #3d434e;
+  --ink-faint: #6b7280;
+  --rule: #d7dbe2;
+  --accent: #1f4d8f;
+  --accent-soft: #eef3fb;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 8.7pt;
+  line-height: 1.27;
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Header ---------- */
+.name {
+  margin: 0;
+  font-size: 19pt;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.role {
+  margin: 3px 0 0;
+  font-size: 9.6pt;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: .3px;
+}
+
+.contact {
+  margin: 5px 0 0;
+  font-size: 8.2pt;
+  color: var(--ink-soft);
+}
+
+.contact span + span::before {
+  content: "•";
+  margin: 0 7px;
+  color: var(--rule);
+}
+
+.contact a { border-bottom: .5px solid var(--rule); }
+
+.hr-accent {
+  height: 2px;
+  background: var(--accent);
+  margin: 6px 0 0;
+  border-radius: 2px;
+}
+
+/* ---------- Sections ---------- */
+.sec { margin-top: 6.5px; }
+
+.sec > h2 {
+  margin: 0 0 4px;
+  font-size: 8.3pt;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.summary {
+  margin: 0;
+  color: var(--ink-soft);
+  text-align: justify;
+}
+
+/* ---------- Entries ---------- */
+.entry { margin-top: 5px; break-inside: avoid; }
+.entry:first-of-type { margin-top: 0; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.entry-title {
+  font-weight: 700;
+  font-size: 9.2pt;
+}
+
+.entry-org {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.entry-meta {
+  font-size: 8pt;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  font-style: italic;
+}
+
+.entry-sub {
+  font-size: 8.2pt;
+  color: var(--ink-faint);
+  margin-top: 1px;
+}
+
+ul.b {
+  margin: 2.5px 0 0;
+  padding-left: 13px;
+  list-style: none;
+}
+
+ul.b > li {
+  position: relative;
+  margin: 1.5px 0;
+  color: var(--ink-soft);
+}
+
+ul.b > li::before {
+  content: "";
+  position: absolute;
+  left: -11px;
+  top: .52em;
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+b, strong { color: var(--ink); font-weight: 700; }
+
+/* ---------- Metric strip ---------- */
+.metrics {
+  display: flex;
+  gap: 5px;
+  margin: 4px 0 0;
+}
+
+.metric {
+  flex: 1;
+  background: var(--accent-soft);
+  border-left: 2.5px solid var(--accent);
+  padding: 3px 6px;
+  border-radius: 0 4px 4px 0;
+}
+
+.metric .m-val {
+  display: block;
+  font-size: 9.4pt;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.15;
+}
+
+.metric .m-lab {
+  display: block;
+  font-size: 6.8pt;
+  color: var(--ink-faint);
+  letter-spacing: .2px;
+  text-transform: uppercase;
+}
+
+/* ---------- Skills grid ---------- */
+.skills { display: grid; grid-template-columns: 104px 1fr; gap: 1.5px 9px; }
+.skills dt { font-weight: 700; font-size: 8.5pt; }
+.skills dd { margin: 0; color: var(--ink-soft); }
+
+/* ---------- Two-column tail ---------- */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+
+.edu-line { display: flex; justify-content: space-between; gap: 10px; }
+.gpa { color: var(--ink-faint); white-space: nowrap; }

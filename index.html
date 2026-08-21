@@ -1,28 +1,33 @@
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Văn Thị Thu Hương | Social Commerce Portfolio</title>
-  <meta name="description" content="Portfolio - Social Commerce / IMC / Short-form Video / TikTok Shop / Shopee" />
+  <title>Văn Thị Thu Hương | Digital Marketing Portfolio</title>
+  <meta name="description"
+    content="Portfolio of Văn Thị Thu Hương — digital marketing: short-form content and creative production, Facebook campaigns, event coordination, and consumer research." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <div class="progress" id="progress"></div>
+
   <div class="nav">
     <div class="nav-inner">
       <div class="brand">
-        <!-- Avatar ở navbar nếu muốn dùng -->
-        <!-- <img class="avatar" src="assets/avaTH.png" alt="Avatar - Văn Thị Thu Hương" /> -->
         <span>Văn Thị Thu Hương</span>
-        <span class="pill">Social Commerce Intern</span>
+        <span class="pill">Digital Marketing</span>
       </div>
 
-      <div class="nav-links" aria-label="Điều hướng">
+      <div class="nav-links" aria-label="Page navigation">
         <a href="#about">About</a>
-        <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#contact">Contact</a>
@@ -35,30 +40,31 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="card hero-main">
-          <button class="hero-avatar-wrap" id="avatarBtn" type="button" aria-label="Phóng to ảnh đại diện">
-            <img class="hero-avatar" src="assets/avaTH.png" alt="Avatar - Văn Thị Thu Hương" />
+          <button class="hero-avatar-wrap" id="avatarBtn" type="button" aria-label="Enlarge profile photo">
+            <img class="hero-avatar" src="assets/avaTH.png" alt="Văn Thị Thu Hương" />
           </button>
 
           <h1 class="h-title">Văn Thị Thu Hương</h1>
           <p class="h-sub">
-            Social Commerce Intern • TikTok Shop / Shopee • Short-form Video • IMC & Performance Mindset
+            Digital marketing — I make the content, put budget behind it, read the numbers, and write down what
+            happened.
           </p>
 
           <div class="meta-row">
             <span class="pill">📍 Ho Chi Minh City</span>
-            <span class="pill">🎯 Focus: Product video & social commerce</span>
-            <span class="pill">📊 Metrics: CTR • CPC • ROAS (foundation)</span>
-            <span class="pill">🎬 Hook • Script • CTA • Content optimization</span>
+            <span class="pill">🎬 Short-form video &amp; visuals</span>
+            <span class="pill">📈 Facebook campaigns &amp; performance review</span>
+            <span class="pill">📊 Research, data &amp; coordination</span>
           </div>
 
           <div class="cta">
-            <a class="btn primary" href="#projects">My Projects</a>
-            <a class="btn" href="assets/VAN_THI_THU_HUONG_CV.pdf" target="_blank" rel="noopener">My CV (PDF)</a>
+            <a class="btn primary" href="#projects">See my work</a>
+            <a class="btn" href="assets/VAN_THI_THU_HUONG_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
             <a class="btn" href="mailto:vanthithuhuong1112@gmail.com">Email</a>
           </div>
         </div>
 
-        <aside class="card hero-side" aria-label="Thông tin liên hệ">
+        <aside class="card hero-side" aria-label="Contact details">
           <div class="kv">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z" stroke="currentColor"
@@ -119,122 +125,233 @@
             </svg>
             <div>
               <div class="k">Availability</div>
-              <div class="v">Minimum 4 days/week</div>
+              <div class="v">Full-time, onsite in HCMC</div>
             </div>
           </div>
         </aside>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat">
+          <span class="s-val">540.6K</span>
+          <span class="s-delta">▲ 63.9%</span>
+          <span class="s-lab">Page views in 28 days</span>
+        </div>
+        <div class="stat">
+          <span class="s-val">2.2K</span>
+          <span class="s-delta">▲ 38.1%</span>
+          <span class="s-lab">Inbound messages</span>
+        </div>
+        <div class="stat">
+          <span class="s-val">−29%</span>
+          <span class="s-delta">vs planned budget</span>
+          <span class="s-lab">Event cost I tracked</span>
+        </div>
+        <div class="stat">
+          <span class="s-val">88%</span>
+          <span class="s-delta">17 → 15</span>
+          <span class="s-lab">Webinar show-up rate</span>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <h2>About</h2>
+      <div class="eyebrow">About</div>
+      <h2>What I do</h2>
       <div class="card block">
-        <p>
-          I had hands-on experience in IMC planning, short-form content development,
-          and performance-oriented communication. I have worked on student projects involving
-          TikTok short-form ads, KPI planning, budget allocation, and message optimization across different touchpoints.
+        <p style="margin-bottom:10px;">
+          I graduated in International Business from the University of Finance and Marketing (CGPA 3.4, three Academic
+          Excellence Scholarships), and I work across the full marketing loop rather than one slice of it: producing
+          the creative, choosing what gets budget, reading the performance data, and reporting the outcome.
         </p>
-        <p>
-          My strengths lie in creating content ideas with strong first-5-second hooks, supporting
-          storyboard and script development, and evaluating communication effectiveness through
-          metrics such as CTR, CPC, ROAS, and engagement behavior. I am eager to apply these skills
-          in a practical environment, especially in roles related to TikTok Shop, Shopee, and
-          creator-driven commerce.
+        <p style="margin-bottom:10px;">
+          Most recently at <b>Vi Hoàng Kim</b> I made the page's daily visuals and short-form videos in Canva and
+          CapCut, ran boosted Facebook post campaigns on company budget, and reviewed the metrics every day to decide
+          what to rebuild and what to drop.
         </p>
+        <p style="margin:0;">
+          Alongside that, I have run an English-language campaign end to end for a US home-fragrance brand, coordinated
+          the administration and budget of a hybrid event for ~200 people, and completed two quantitative research
+          studies in SmartPLS — including a 433-response dataset I collected, cleaned and analysed myself.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="section">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I have worked</h2>
+
+      <div class="card block">
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-role">Social Media Marketing Staff — <span class="tl-org">Vi Hoàng Kim</span></div>
+            <div class="tl-time">Apr – Jun 2026</div>
+            <ul>
+              <li>Produced the page's daily creative — promotional visuals and short-form videos in <b>Canva and
+                  CapCut</b> — writing the opening hook, on-screen captions and closing CTA for each asset.</li>
+              <li>Ran <b>boosted Facebook post campaigns on company budget</b>, selecting which posts to back on early
+                engagement signals and tracking results to extend, cut or re-cut.</li>
+              <li>Reviewed page and post-level metrics daily and rebuilt the winning angles into new content.</li>
+              <li>Handled inbound comments and messages end to end, turning <b>2.89K new contacts</b> into
+                conversations.</li>
+              <li>Over 28 days: <b>540.6K views (+63.9%)</b>, <b>3.3K interactions (+92.8%)</b>, <b>2.2K messaging
+                  contacts (+38.1%)</b>, <b>603 new followers (+144%)</b>, individual posts at 24K–62K views.</li>
+            </ul>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-role">English Teaching Assistant — <span class="tl-org">Ms. Vy's English Class</span></div>
+            <div class="tl-time">Oct 2023 – Mar 2025 · 18 months</div>
+            <ul>
+              <li>Ran daily class operations independently alongside full-time study — materials, attendance, and
+                follow-up on every assigned activity.</li>
+              <li>Worked bilingually with students and the teaching team, resolving issues and clarifying information.
+              </li>
+              <li>Kept the record of student progress and condensed it into structured updates for the lead teacher.
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects" class="section">
-      <h2>Featured Projects</h2>
+      <div class="eyebrow">Selected work</div>
+      <h2>Projects</h2>
       <p class="sub">
-        Student projects related to IMC, social commerce, and performance-oriented communication.
+        Campaigns, events and research — each page has the detail, the method and the outcome.
       </p>
 
       <div class="grid-projects">
         <article class="card project">
           <h3 class="p-title">
-            <a class="p-link" href="projects/hoi-an-destination-choice.html">
-              Graduation Project — Determinants of Travel Destination Choice Intention Among Vietnamese Tourists: Hoi An
+            <a class="p-link" href="projects/Webinar-Slow-North-Natural-Living-Goods.html">
+              E-business Webinar — Slow North Natural Living Goods
             </a>
           </h3>
-          <div class="p-time">Graduation Thesis • Tourism Research • PLS-SEM</div>
+          <div class="p-time">Aug 2024 · Individual project · US brand, delivered in English</div>
           <ul>
-            <li>Examined how destination image, destination features, infrastructure, behavioral control, economic
-              concerns, and social influence affect Hoi An destination choice intention.</li>
-            <li>Used 433 valid responses and SmartPLS analysis to test a TPB-based tourism model.</li>
-            <li>Found Social Influence as the strongest predictor, with the model explaining 82.8% of intention
+            <li>Sole marketer for a home-fragrance brand in Austin, Texas: brochure design, <b>Facebook promotion</b>,
+              registration funnel and Microsoft Teams setup.</li>
+            <li>Converted the promotion into <b>17 registrations → 15 attendees (88% show-up)</b>, with automated
+              confirmation email.</li>
+            <li>Presented the full session in English, then analysed post-event survey feedback.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">End-to-end ownership</span>
+            <span class="tag">Facebook promo</span>
+            <span class="tag">Funnel &amp; conversion</span>
+            <span class="tag">English delivery</span>
+          </div>
+        </article>
+
+        <article class="card project">
+          <h3 class="p-title">
+            <a class="p-link" href="projects/hoi-an-destination-choice.html">
+              Graduation Thesis — Destination Choice Intention Among Vietnamese Tourists: Hội An
+            </a>
+          </h3>
+          <div class="p-time">Graduation thesis · Tourism research · PLS-SEM</div>
+          <ul>
+            <li>Examined how destination image, features, infrastructure, behavioural control, economic concerns and
+              social influence affect destination choice intention.</li>
+            <li>Handled <b>433 valid responses</b> end to end — collection, cleaning, validity checks and SmartPLS
+              analysis on a TPB-based model.</li>
+            <li>Found social influence the strongest predictor, with the model explaining <b>82.8%</b> of intention
               variance.</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">Graduation Project</span>
-            <span class="tag">Tourism Research</span>
+            <span class="tag">Graduation project</span>
             <span class="tag">PLS-SEM</span>
-            <span class="tag">Hoi An</span>
+            <span class="tag">Data integrity</span>
+            <span class="tag">Report writing</span>
           </div>
         </article>
 
         <article class="card project">
           <h3 class="p-title">
             <a class="p-link" href="projects/tiktok-livestream-purchase-intention.html">
-              Business Research — Factors Affecting Gen Z’s Purchase Intention on TikTok Livestream
+              Business Research — Gen Z Purchase Intention on TikTok Livestream
             </a>
           </h3>
-          <div class="p-time">Research Project • TikTok Livestream • PLS-SEM</div>
+          <div class="p-time">Research project · Social commerce · SmartPLS</div>
           <ul>
-            <li>Explored how influencer endorsement, reviews, price, usefulness, ease of use, and information quality
+            <li>Explored how influencer endorsement, reviews, price, usefulness, ease of use and information quality
               affect purchase intention.</li>
-            <li>Used survey data and SmartPLS analysis to examine social commerce behavior among Gen Z.</li>
-            <li>Identified low-price appeal as the strongest positive driver of purchase intention.</li>
+            <li>Designed the survey, collected the data and ran the SmartPLS analysis.</li>
+            <li>Identified <b>low-price appeal as the strongest positive driver</b> — ahead of influencer endorsement.
+            </li>
           </ul>
           <div class="tag-row">
-            <span class="tag">Research</span>
-            <span class="tag">TikTok Livestream</span>
-            <span class="tag">Consumer Behavior</span>
+            <span class="tag">Consumer behaviour</span>
+            <span class="tag">Social commerce</span>
+            <span class="tag">Survey design</span>
             <span class="tag">SmartPLS</span>
           </div>
         </article>
 
         <article class="card project">
           <h3 class="p-title">
-            <a class="p-link" href="projects/tet-hcmc.html">
-              IMC Promotional Plan — Tet Holiday in HCMC
+            <a class="p-link" href="projects/topcv-labor-market-report.html">
+              Hybrid Event with TopCV × UFM — "Labor Market Report 2024"
             </a>
           </h3>
-          <div class="p-time">Jan 2025 • Grade: HD2 (3.75)</div>
+          <div class="p-time">Aug 2024 · Role: Administration &amp; Finance</div>
           <ul>
-            <li>Designed a 1-month IMC promotion using the <b>Trigger – Engage – Amplify</b> framework.</li>
-            <li>Allocated mock budgets for Facebook video placements, outdoor media, and social media channels.</li>
-            <li>Analyzed audience response through engagement metrics and message effectiveness.</li>
-            <li>Applied segmentation, touchpoint planning, and performance review to support communication decisions.
-            </li>
+            <li>Calculated activity costs and kept actual spend <b>29% below plan</b>.</li>
+            <li>Coordinated standee printing and prepared gifts for speakers and participants.</li>
+            <li>Supported nearly <b>200 participants</b> across both online and offline formats, and managed post-event
+              follow-up.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Event logistics</span>
+            <span class="tag">Budget control</span>
+            <span class="tag">Coordination</span>
+            <span class="tag">Hybrid format</span>
+          </div>
+        </article>
+
+        <article class="card project">
+          <h3 class="p-title">
+            <a class="p-link" href="projects/tet-hcmc.html">
+              IMC Promotional Plan — Tết Holiday in HCMC
+            </a>
+          </h3>
+          <div class="p-time">Jan 2025 · Grade: HD2 (3.75)</div>
+          <ul>
+            <li>Designed a one-month IMC promotion using the <b>Trigger – Engage – Amplify</b> framework.</li>
+            <li>Allocated budget across Facebook video placements, outdoor media and social channels.</li>
+            <li>Produced two Facebook video variants testing different persuasion sequences, then reviewed engagement
+              to judge message effectiveness.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">IMC</span>
-            <span class="tag">Planning</span>
-            <span class="tag">Budgeting</span>
-            <span class="tag">Performance Review</span>
+            <span class="tag">Budget allocation</span>
+            <span class="tag">Channel planning</span>
+            <span class="tag">Creative variants</span>
           </div>
         </article>
 
         <article class="card project">
           <h3 class="p-title">
             <a class="p-link" href="projects/yody-ao-am-cho-em.html">
-              IMC Strategy — “Áo ấm cho em” CSR Campaign (YODY)
+              IMC Strategy — "Áo ấm cho em" CSR Campaign (YODY)
             </a>
           </h3>
-          <div class="p-time">Dec 2024 • Grade: HD2 (3.75)</div>
+          <div class="p-time">Dec 2024 · Grade: HD2 (3.75)</div>
           <ul>
-            <li>Built communication KPIs for brand awareness, reach, and engagement.</li>
+            <li>Built communication KPIs for brand awareness, reach and engagement.</li>
             <li>Identified target personas and mapped messaging across multiple touchpoints.</li>
-            <li>Assessed campaign responsiveness and evaluated communication efficiency across 3 phases.</li>
-            <li>Strengthened skills in KPI-setting, media planning, and message optimization.</li>
+            <li>Assessed campaign responsiveness and evaluated communication efficiency across three phases.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">CSR</span>
-            <span class="tag">KPIs</span>
-            <span class="tag">Media Planning</span>
+            <span class="tag">KPI setting</span>
+            <span class="tag">Media planning</span>
             <span class="tag">Touchpoints</span>
           </div>
         </article>
@@ -242,115 +359,80 @@
         <article class="card project">
           <h3 class="p-title">
             <a class="p-link" href="projects/vinamilk-tiktok.html">
-              IMC Advertising Project — VINAMILK (TikTok Short-form)
+              IMC Advertising — VINAMILK (TikTok Short-form)
             </a>
           </h3>
-          <div class="p-time">Nov 2024 • Grade: HD2 (3.75)</div>
+          <div class="p-time">Nov 2024 · Grade: HD2 (3.75)</div>
           <ul>
             <li>Produced TikTok short-form ads applying <b>first-5-second hook</b> techniques to increase retention.
             </li>
-            <li>Evaluated content performance based on engagement behavior and message clarity.</li>
-            <li>Practiced ad storytelling structures and persuasive communication for social platforms.</li>
+            <li>Evaluated content performance on engagement behaviour and message clarity.</li>
+            <li>Practised ad storytelling structures and persuasive communication for social platforms.</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">TikTok</span>
-            <span class="tag">Short-form Video</span>
-            <span class="tag">Hook Strategy</span>
-            <span class="tag">Creative Evaluation</span>
+            <span class="tag">Short-form video</span>
+            <span class="tag">Hook strategy</span>
+            <span class="tag">CapCut</span>
+            <span class="tag">Creative evaluation</span>
           </div>
         </article>
-
-        <article class="card project">
-          <h3 class="p-title">
-            <a class="p-link" href="projects/topcv-labor-market-report.html">
-              Hybrid Event with TopCV (UFM) — “LABOR MARKET REPORT 2024”
-            </a>
-          </h3>
-          <div class="p-time">Aug 2024 • Role: Administration / Finance</div>
-          <ul>
-            <li>Calculated activity costs and helped keep actual expenses <b>29% lower</b> than expected.</li>
-            <li>Coordinated standee printing and prepared gifts for speakers and participants.</li>
-            <li>Worked with team members to support nearly <b>200 participants</b> in both online and offline event
-              formats.</li>
-          </ul>
-          <div class="tag-row">
-            <span class="tag">Event Support</span>
-            <span class="tag">Administration</span>
-            <span class="tag">Budget Control</span>
-            <span class="tag">Coordination</span>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section id="experience" class="section">
-      <h2>Experience / Activities</h2>
-      <div class="card block">
-        <h3>Hybrid Event with TopCV (UFM) — “LABOR MARKET REPORT 2024”</h3>
-        <p class="small">Aug 2024 • Role: Administration / Finance</p>
-        <ul>
-          <li>Calculated event costs and helped keep actual expenses <b>29% lower</b> than expected.</li>
-          <li>Coordinated printing materials and prepared gifts for speakers and audience members.</li>
-          <li>Worked with team members to support nearly <b>200 participants</b> in both online and offline formats.
-          </li>
-        </ul>
       </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" class="section">
-      <h2>Skills</h2>
+      <div class="eyebrow">Skills</div>
+      <h2>What I work with</h2>
 
       <div class="two-col">
         <div class="card block">
-          <h3>Social Commerce Skills</h3>
+          <h3>Content &amp; creative</h3>
           <div class="listish">
-            <span class="chip">Short-form video (TikTok / Shopee)</span>
-            <span class="chip">Hook in first 5 seconds</span>
-            <span class="chip">Storyboard / Script</span>
-            <span class="chip">Captions</span>
-            <span class="chip">Pacing</span>
-            <span class="chip">CTA for add-to-cart</span>
+            <span class="chip">Short-form video (CapCut)</span>
+            <span class="chip">Visual design (Canva)</span>
+            <span class="chip">Hook → Angle → CTA</span>
+            <span class="chip">On-screen captions</span>
+            <span class="chip">Storyboard &amp; script</span>
+            <span class="chip">Product imagery</span>
           </div>
         </div>
 
         <div class="card block">
-          <h3>Digital Advertising Fundamentals</h3>
+          <h3>Campaigns &amp; paid social</h3>
           <div class="listish">
-            <span class="chip">Campaign structure</span>
-            <span class="chip">Objectives</span>
-            <span class="chip">Targeting</span>
-            <span class="chip">Budgeting</span>
-            <span class="chip">CTR / CPC / ROAS mindset</span>
-            <span class="chip">Content optimization</span>
+            <span class="chip">Boosted Facebook campaigns</span>
+            <span class="chip">IMC planning</span>
+            <span class="chip">Budget allocation</span>
+            <span class="chip">KPI setting</span>
+            <span class="chip">CTR / CPC / ROAS literacy</span>
+            <span class="chip">Performance review</span>
           </div>
         </div>
       </div>
 
       <div class="two-col" style="margin-top:14px;">
         <div class="card block">
-          <h3>Tools</h3>
+          <h3>Data &amp; research</h3>
           <div class="listish">
-            <span class="chip">CapCut</span>
-            <span class="chip">Canva</span>
+            <span class="chip">Daily metric review</span>
+            <span class="chip">Survey design &amp; analysis</span>
             <span class="chip">Excel</span>
-            <span class="chip">PowerPoint</span>
-            <span class="chip">Word</span>
-            <span class="chip">Basic Power BI</span>
-            <span class="chip">Basic SmartPLS</span>
+            <span class="chip">Power BI (basic)</span>
+            <span class="chip">SmartPLS</span>
+            <span class="chip">PESTEL · BCG</span>
+            <span class="chip">Competitor &amp; pricing analysis</span>
           </div>
         </div>
 
         <div class="card block">
-          <h3>Languages & Strengths</h3>
+          <h3>Coordination &amp; language</h3>
           <div class="listish">
-            <span class="chip">Vietnamese</span>
-            <span class="chip">English (IELTS 5.5)</span>
-            <span class="chip">Adaptability</span>
-            <span class="chip">Research</span>
-            <span class="chip">Teamwork</span>
-            <span class="chip">Analysis</span>
+            <span class="chip">Event logistics</span>
+            <span class="chip">Budget tracking</span>
+            <span class="chip">Documentation &amp; reporting</span>
+            <span class="chip">Microsoft Teams</span>
+            <span class="chip">Vietnamese (native)</span>
+            <span class="chip">English — IELTS 5.5</span>
           </div>
         </div>
       </div>
@@ -358,19 +440,24 @@
 
     <!-- EDUCATION -->
     <section id="education" class="section">
-      <h2>Education & Awards</h2>
+      <div class="eyebrow">Education</div>
+      <h2>Education &amp; awards</h2>
       <div class="card block">
         <h3>University of Finance and Marketing — International Program with HELP University</h3>
-        <p><b>Bachelor of International Business — Completed program in 2025 (awaiting diploma)</b></p>
+        <p><b>Bachelor of International Business — graduated 2026</b> · CGPA 3.4 / 4.0</p>
 
         <ul>
           <li>
-            Academic Excellence Scholarship: Year 2 – Semester 3
+            Academic Excellence Scholarship — Year 2, Semester 3
             <span class="gpa-pill" aria-label="GPA 3.3">GPA 3.3</span>
           </li>
           <li>
-            Academic Excellence Scholarship: Year 3 – Semester 1
+            Academic Excellence Scholarship — Year 3, Semester 1
             <span class="gpa-pill" aria-label="GPA 3.4">GPA 3.4</span>
+          </li>
+          <li>
+            Academic Excellence Scholarship — Year 4, Semester 1
+            <span class="gpa-pill" aria-label="GPA 3.625">GPA 3.625</span>
           </li>
         </ul>
       </div>
@@ -378,9 +465,10 @@
 
     <!-- CONTACT -->
     <section id="contact" class="section">
-      <h2>Contact</h2>
+      <div class="eyebrow">Contact</div>
+      <h2>Get in touch</h2>
       <div class="card block">
-        <p style="margin:0 0 10px;">
+        <p style="margin:0 0 12px;">
           Email: <a href="mailto:vanthithuhuong1112@gmail.com">vanthithuhuong1112@gmail.com</a><br />
           Phone: <a href="tel:+84905985107">0905 985 107</a><br />
           LinkedIn:
@@ -391,8 +479,8 @@
 
         <div class="cta">
           <a class="btn primary"
-            href="mailto:vanthithuhuong1112@gmail.com?subject=Application%20for%20Social%20Commerce%20Intern">
-            Send Email
+            href="mailto:vanthithuhuong1112@gmail.com?subject=Opportunity%20—%20V%C4%83n%20Th%E1%BB%8B%20Thu%20H%C6%B0%C6%A1ng">
+            Send email
           </a>
           <a class="btn" href="assets/VAN_THI_THU_HUONG_CV.pdf" target="_blank" rel="noopener">View CV</a>
         </div>
@@ -404,106 +492,16 @@
     </div>
   </main>
 
-  <!-- MODAL AVATAR -->
-  <div class="modal" id="avatarModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Ảnh đại diện">
+  <!-- MODAL -->
+  <div class="modal" id="imgModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
     <div class="modal-backdrop" data-close="1"></div>
-
     <div class="modal-panel" role="document">
-      <button class="modal-close" type="button" aria-label="Đóng" data-close="1">✕</button>
-      <img class="modal-img" src="assets/avaTH.png" alt="Avatar - Văn Thị Thu Hương (phóng to)" />
+      <button class="modal-close" type="button" aria-label="Close" data-close="1">✕</button>
+      <img class="modal-img" id="modalImg" src="assets/avaTH.png" alt="Văn Thị Thu Hương" />
     </div>
   </div>
 
-  <script>
-    // year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ===== 1) Avatar zoom modal =====
-    const avatarBtn = document.getElementById('avatarBtn');
-    const modal = document.getElementById('avatarModal');
-    let lastFocusEl = null;
-
-    function openModal() {
-      if (!modal) return;
-      lastFocusEl = document.activeElement;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('no-scroll');
-
-      const closeBtn = modal.querySelector('[data-close="1"]');
-      if (closeBtn) closeBtn.focus();
-    }
-
-    function closeModal() {
-      if (!modal) return;
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('no-scroll');
-
-      if (lastFocusEl && lastFocusEl.focus) lastFocusEl.focus();
-    }
-
-    if (avatarBtn && modal) {
-      avatarBtn.addEventListener('click', openModal);
-
-      modal.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target && target.getAttribute && target.getAttribute('data-close') === '1') {
-          closeModal();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('open')) {
-          closeModal();
-        }
-      });
-    }
-
-    // ===== 2) Reveal on scroll =====
-    const revealTargets = [
-      '.hero-main', '.hero-side',
-      '.section', '.project', '.kv', '.block'
-    ];
-
-    const els = document.querySelectorAll(revealTargets.join(','));
-    els.forEach(el => el.classList.add('reveal'));
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    els.forEach(el => io.observe(el));
-
-    // ===== 3) Nav active highlight =====
-    const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute('href')))
-      .filter(Boolean);
-
-    const navIO = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (!visible) return;
-
-      navLinks.forEach(a => a.classList.remove('active'));
-      const id = '#' + visible.target.id;
-      const active = navLinks.find(a => a.getAttribute('href') === id);
-      if (active) active.classList.add('active');
-    }, {
-      rootMargin: '-35% 0px -55% 0px',
-      threshold: [0.1, 0.2, 0.3, 0.4, 0.5]
-    });
-
-    sections.forEach(sec => navIO.observe(sec));
-  </script>
+  <script src="app.js"></script>
 </body>
 
 </html>
