@@ -27,7 +27,9 @@
 
   /* ---------- Image modal (avatar + media gallery) ---------- */
   var modal = document.getElementById('imgModal') || document.getElementById('avatarModal');
-  var modalImg = document.getElementById('modalImg') || (modal && modal.querySelector('.modal-img'));
+  var modalImg = document.getElementById('modalImg')
+    || document.getElementById('imgModalTarget')
+    || (modal && modal.querySelector('.modal-img'));
   var lastFocusEl = null;
 
   function openModal(src, alt) {
@@ -69,6 +71,14 @@
       openModal(img ? img.getAttribute('src') : null, img ? img.getAttribute('alt') : '');
     });
   }
+
+  /* Older project pages mark their lightbox triggers with data-zoom="<full src>" */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-zoom]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var img = btn.querySelector('img');
+      openModal(btn.getAttribute('data-zoom'), img ? img.getAttribute('alt') : '');
+    });
+  });
 
   Array.prototype.forEach.call(document.querySelectorAll('.media-item[data-full]'), function (btn) {
     btn.addEventListener('click', function () {
@@ -122,6 +132,93 @@
     });
     sections.forEach(function (sec) { navIO.observe(sec); });
   }
+
+  /* ---------- Animated count-up on stat tiles ----------
+     Parses "540.6K", "−29%", "~200", "18 mo" into prefix + number + suffix
+     so only the number animates and the formatting survives. */
+  var statVals = Array.prototype.slice.call(document.querySelectorAll('.stat .s-val'));
+
+  function animateValue(el) {
+    var raw = el.textContent.trim();
+    var m = raw.match(/^(\D*?)([\d]+(?:[.,]\d+)?)(.*)$/);
+    if (!m) return;
+    var prefix = m[1], target = parseFloat(m[2].replace(',', '.')), suffix = m[3];
+    var decimals = (m[2].split(/[.,]/)[1] || '').length;
+    var duration = 900, start = null;
+
+    function frame(ts) {
+      if (start === null) start = ts;
+      var t = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - t, 3);          // ease-out cubic
+      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = raw;                    // land exactly on the source text
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (statVals.length && !reduceMotion && 'IntersectionObserver' in window) {
+    var statIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          animateValue(e.target);
+          statIO.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    statVals.forEach(function (el) { statIO.observe(el); });
+  }
+
+  /* ---------- Click-to-copy for email and phone ---------- */
+  function attachCopy(link) {
+    var value = link.getAttribute('href').replace(/^(mailto:|tel:)/, '');
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'Copy ' + value);
+    btn.textContent = 'Copy';
+
+    btn.addEventListener('click', function () {
+      var done = function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(value).then(done, function () { btn.textContent = 'Press Ctrl+C'; });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = value;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { /* ignore */ }
+        ta.remove();
+      }
+    });
+    link.parentNode.appendChild(btn);
+  }
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('.kv .v a[href^="mailto:"], .kv .v a[href^="tel:"]'),
+    attachCopy
+  );
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.createElement('button');
+  toTop.type = 'button';
+  toTop.className = 'to-top';
+  toTop.setAttribute('aria-label', 'Back to top');
+  toTop.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+    + '<path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" '
+    + 'stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  toTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+  document.body.appendChild(toTop);
+
+  window.addEventListener('scroll', function () {
+    toTop.classList.toggle('show', window.scrollY > 600);
+  }, { passive: true });
 
   /* ---------- Pause other videos when one starts ---------- */
   var videos = Array.prototype.slice.call(document.querySelectorAll('video'));

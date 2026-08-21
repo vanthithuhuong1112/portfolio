@@ -13,6 +13,7 @@
 </head>
 
 <body>
+  <div class="progress" id="progress"></div>
     <div class="nav">
         <div class="nav-inner">
             <div class="brand">
@@ -147,41 +148,11 @@
         <div class="modal-backdrop" data-close="1"></div>
         <div class="modal-panel" role="document">
             <button class="modal-close" type="button" aria-label="Đóng" data-close="1">✕</button>
-            <img class="modal-img" id="imgModalTarget" src="" alt="Preview" />
+            <img class="modal-img" id="imgModalTarget" alt="Preview" />
         </div>
     </div>
 
-    <script>
-        // Lightbox for images (buttons with data-zoom)
-        const imgModal = document.getElementById('imgModal');
-        const imgTarget = document.getElementById('imgModalTarget');
-
-        function openImg(src) {
-            imgTarget.src = src;
-            imgModal.classList.add('open');
-            imgModal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('no-scroll');
-        }
-        function closeImg() {
-            imgModal.classList.remove('open');
-            imgModal.setAttribute('aria-hidden', 'true');
-            imgTarget.src = '';
-            document.body.classList.remove('no-scroll');
-        }
-
-        document.querySelectorAll('[data-zoom]').forEach(btn => {
-            btn.addEventListener('click', () => openImg(btn.getAttribute('data-zoom')));
-        });
-
-        imgModal.addEventListener('click', (e) => {
-            const t = e.target;
-            if (t && t.getAttribute && t.getAttribute('data-close') === '1') closeImg();
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && imgModal.classList.contains('open')) closeImg();
-        });
-    </script>
+  <script src="../app.js"></script>
 </body>
 
 </html>
