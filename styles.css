@@ -1392,20 +1392,6 @@ video {
   border-radius: 10px;
 }
 
-/* ---------- Note / callout ---------- */
-.note {
-  border-left: 3px solid var(--accent);
-  background: rgba(255, 255, 255, .035);
-  padding: 12px 14px;
-  border-radius: 0 12px 12px 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.note b {
-  color: var(--text);
-}
-
 /* ---------- Project card: accent bar that grows on hover ----------
    Grid/flex layout for .grid-projects is defined in the PROJECT GRID
    section above; only the accent treatment is added here. */
