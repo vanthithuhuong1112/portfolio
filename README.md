@@ -27,7 +27,13 @@ Three one-page CVs, all generated from HTML source so they stay editable:
 | `cv/cv-adify.html` | `assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf` |
 | `cv/cv-highlands.html` | `assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf` |
 
-`cv/cv.css` is shared; each CV overrides only `--accent` / `--accent-soft` for its own colour.
+All three share `cv/cv.css`, which is a rebuild of the Canva **"Resume - A4"** template measured from
+the exported PDF — photo at x=61pt, 24pt name block at x=244.7pt, rules at y=135 and y=207 framing the
+summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one place changes all three.
+
+`cv/fonts/` holds **Noto Serif** (latin + vietnamese subsets, ~130 KB), self-hosted so the PDF renders
+identically offline and inside headless Edge. The Canva original used PT Serif, which has no Vietnamese
+subset — that is why `Ị` and `ƯƠ` in the name fell back to a sans-serif mid-word in the old export.
 
 ### Rebuilding a CV after editing its HTML
 
@@ -37,8 +43,16 @@ Edit the `.html`, then render it with headless Edge (Windows):
 "/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" --headless=new --disable-gpu --no-pdf-header-footer --print-to-pdf="C:/CODE/portfolio/assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf" "file:///C:/CODE/portfolio/cv/cv-adify.html"
 ```
 
-Each CV is tuned to fill roughly one A4 page. If you add content and it spills onto a second page,
-either trim a bullet or nudge `font-size` / `line-height` in `cv/cv.css`.
+**Each CV must stay on one A4 page.** The layout is a CSS grid, and Chrome will move the *entire* grid
+to a second page once it no longer fits — so a small overrun looks like a big one. To check quickly,
+open the CV at `http://localhost:5173/cv/cv-adify.html` and run this in the console:
+
+```bash
+document.querySelector('.sheet').scrollHeight   // must stay at 1115 (px)
+```
+
+If it exceeds 1115, trim a bullet rather than shrinking the type — `line-height: 1.30` in `cv/cv.css`
+already matches the leading measured in the original and has little room left.
 
 ## Running locally
 
