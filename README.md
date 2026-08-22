@@ -54,6 +54,22 @@ document.querySelector('.sheet').scrollHeight   // must stay at 1115 (px)
 If it exceeds 1115, trim a bullet rather than shrinking the type — `line-height: 1.30` in `cv/cv.css`
 already matches the leading measured in the original and has little room left.
 
+### Keeping the CV links clickable
+
+The contact rows and the project titles are real `<a>` elements, which is what puts clickable
+annotations into the exported PDF. **Use absolute URLs** (`https://vanthithuhuong1112.github.io/...`)
+— a relative path resolves against the local file when the PDF is opened from a download and goes
+nowhere. If you add a project, link its title to the matching page under `projects/`.
+
+To confirm the links survived a re-render:
+
+```bash
+python -c "import pdfplumber;p=pdfplumber.open('assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf');print(len(p.pages[0].hyperlinks),'links')"
+```
+
+Expect 10 on the general CV, 8 on the ADIFY one, 9 on the Highlands one (a title that wraps onto two
+lines produces two annotations).
+
 ## Running locally
 
 ```bash
