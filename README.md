@@ -165,9 +165,16 @@ python -c "import pypdfium2 as p;d=p.PdfDocument('in.pdf');i=[d[n].render(scale=
 
 ## Branches
 
-`main` is the working branch and the one GitHub Pages publishes. `apply/adify` and `apply/highlands`
-each hold the pack sent to one company, with the other company's page, CV source and CV PDF removed —
-so a link shared with one company cannot walk to the other's material even by editing the URL.
+`main` is the working branch and **the only branch GitHub Pages publishes** (source: `main` → `/`, confirmed
+via `gh api repos/<owner>/portfolio/pages`). `apply/adify` and `apply/highlands` are *archive* branches: each
+holds the pack sent to one company, with the other company's page, CV source and CV PDF removed. They are a
+record of what was sent, **not separate deployments** — a branch has no URL of its own.
+
+That means the live site serves both application pages, and a reader who edits `adify.html` to
+`highlands.html` in the address bar reaches the other one. What protects them is that neither page is linked
+from `index.html` and both carry `<meta name="robots" content="noindex">`, so they stay out of search results
+and off the site's own navigation. If genuine isolation is ever needed, the two packs have to live in separate
+repositories with their own Pages sites — one repo cannot publish two branches.
 
 To refresh a pack after work lands on `main`:
 
