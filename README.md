@@ -35,6 +35,22 @@ summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one pla
 identically offline and inside headless Edge. The Canva original used PT Serif, which has no Vietnamese
 subset — that is why `Ị` and `ƯƠ` in the name fell back to a sans-serif mid-word in the old export.
 
+### The CV photo
+
+All three CVs use `assets/avaTH-cv.png`, the portrait exported from page 11 of the Canva deck. The export
+arrives as 490×733 with a 2 px frame drawn around the page; that frame is cropped off and the image is then
+cut to **486×525**, the exact aspect of the photo box in `cv.css` (118.6pt × 128pt), with roughly 10% headroom
+above the hairline. Keeping the file at that aspect means `object-fit: cover` has nothing left to crop, so the
+framing in the PDF is whatever you see in the file. At 486 px wide it also lands close to 300 dpi at print size.
+
+The site uses the same portrait, cropped differently: `assets/avaTH-portrait.png` is a **486×486** square cut
+from the same export, sized for the 128×128 rounded avatar in the hero and for the lightbox behind it. Two crops
+rather than one file because the CV box is nearly square while the hero is exactly square, and letting CSS crop a
+tall portrait into either one clipped the top of the head.
+
+`assets/avaTH.png` (and the high-resolution `assets/avaTH1.jpg`) are the previous portrait, kept but no longer
+referenced.
+
 ### Rebuilding a CV after editing its HTML
 
 Edit the `.html`, then render it with headless Edge (Windows):
@@ -67,8 +83,8 @@ To confirm the links survived a re-render:
 python -c "import pdfplumber;p=pdfplumber.open('assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf');print(len(p.pages[0].hyperlinks),'links')"
 ```
 
-Expect 10 on the general CV, 8 on the ADIFY one, 9 on the Highlands one (a title that wraps onto two
-lines produces two annotations).
+Expect **12 on the general CV, 10 on the ADIFY one, 10 on the Highlands one** (a title that wraps onto two
+lines produces two annotations, which is why the count moves when wording changes length).
 
 ## Running locally
 
@@ -96,6 +112,39 @@ default blue/violet.
 `app.js` is shared by `index.html`, the two application pages and the Slow North project page —
 scroll progress bar, image lightbox, reveal-on-scroll, nav highlighting. The older project pages
 still carry their own inline scripts.
+
+## Project documents
+
+Every project claim that can be checked links to the document behind it. The PDFs live in `assets/` and are
+linked from the project page, from the matching card on `index.html`, and from whichever application page
+carries that project:
+
+| File | Backs |
+| --- | --- |
+| `assets/slow-north-webinar-report.pdf` | Slow North webinar — the full written report (50 pages: brochure, Facebook post, registration and email screenshots, survey form and results). The same report also exists as a [Sway](https://sway.cloud.microsoft/KtFrcvZ91ut2ntsp) and the session recording is on [YouTube](https://youtu.be/Y2HqN0w3u5Y). |
+| `assets/hoi-an-destination-choice-deck.pdf` | Hoi An research — 12-page summary deck (context, method, reliability table, β/f² ranking, recommendations, Q1–Q4 roadmap). Sits **alongside** the full thesis, not instead of it. |
+| `assets/graduation-project-hoi-an.pdf` | Hoi An research — the full 64-page thesis. |
+| `assets/business-research.pdf` | TikTok livestream purchase-intention study. |
+| `assets/topcv-labor-market-report.pdf` | TopCV × UFM hybrid event. |
+
+Numbers quoted on the Slow North and Hoi An pages come straight from those files — 17 registrations,
+15 attendees, 13 survey responses (77% extremely satisfied, 92% would return); 433 responses, R² 0.828,
+β 0.297 for social influence. If a document is replaced, re-check the page against it.
+
+One known discrepancy: the summary deck labels its outcome construct row "Tourism infrastructure (TI)"
+while TI is defined earlier in the same deck as *Travel Choice Intention*. The site table uses the correct
+label; the deck itself is still worth fixing in Canva.
+
+### Why the webinar report is a re-render
+
+The report as exported from Word is 6 MB of page-sized images with no text layer and no link annotations. It is
+stored here re-rendered at **120 dpi, JPEG quality 68** — 3.0 MB, half the weight, with the body text still sharp
+on screen. Nothing was lost in the conversion because there was no text or link data to lose. If the report is
+ever re-exported, run the same pass rather than committing the raw 6 MB file:
+
+```bash
+python -c "import pypdfium2 as p;d=p.PdfDocument('in.pdf');i=[d[n].render(scale=120/72).to_pil().convert('RGB') for n in range(len(d))];i[0].save('out.pdf',save_all=True,append_images=i[1:],resolution=120,quality=68,optimize=True)"
+```
 
 ## Branches
 

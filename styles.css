@@ -1949,3 +1949,70 @@ body:has(.cta-bar) .to-top {
   text-decoration-color: var(--accent);
   color: #fff;
 }
+
+/* ---------------------------------------------------------------------------
+   Data tables — statistical results on the research project pages.
+   Wrapped in .table-wrap so a wide table scrolls inside its own box instead of
+   pushing the page sideways on a phone.
+   ------------------------------------------------------------------------- */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 6px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 640px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 9px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+
+.data-table thead th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  border-bottom-color: rgba(255, 255, 255, .22);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Two-column tables sit inside a half-width card, so they wrap rather than scroll. */
+.data-table.compact {
+  min-width: 0;
+}
+
+.data-table.compact th,
+.data-table.compact td {
+  white-space: normal;
+}
+
+.data-table tbody tr.is-outcome td {
+  color: var(--muted);
+}
+
+.data-table caption {
+  caption-side: bottom;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: left;
+  padding-top: 10px;
+}
