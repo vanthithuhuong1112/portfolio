@@ -165,5 +165,30 @@ python -c "import pypdfium2 as p;d=p.PdfDocument('in.pdf');i=[d[n].render(scale=
 
 ## Branches
 
-`apply/adify` and `apply/highlands` are frozen snapshots of exactly what each company was sent,
-with the other company's page and CV removed. `main` is the working branch.
+`main` is the working branch and the one GitHub Pages publishes. `apply/adify` and `apply/highlands`
+each hold the pack sent to one company, with the other company's page, CV source and CV PDF removed —
+so a link shared with one company cannot walk to the other's material even by editing the URL.
+
+To refresh a pack after work lands on `main`:
+
+```bash
+git checkout apply/adify && git merge main
+```
+
+The three removed files come back as `modify/delete` conflicts every time, which is the merge asking
+whether the removal still stands. It does — `git rm` them again and commit:
+
+```bash
+git rm highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf
+```
+
+On `apply/highlands` the mirror image: `adify.html`, `cv/cv-adify.html`,
+`assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf`.
+
+### Writing against a posting
+
+Both application pages carry a **"Against the posting"** section that walks the job description in its
+own order and its own words, with the evidence under each item — ADIFY's 50/20/15/15 split of the role,
+Highlands' nine responsibilities grouped into four. When a posting asks for something that is not there,
+the page says so plainly (the TikTok paid-spend gap on the ADIFY page). A claimed strength a recruiter
+disproves in the interview costs more than the gap it covered.
