@@ -11,25 +11,34 @@ Static site (HTML + CSS + a little vanilla JS), published with GitHub Pages from
 | `index.html` | Main portfolio — the link to share publicly and put on a CV. |
 | `adify.html` | Application page tailored for **CÔNG TY TNHH ADIFY** (Digital Marketing Intern, Performance / Ecommerce). Creative-led. |
 | `highlands.html` | Application page tailored for **Highland Coffee Service JSC** (Digital Marketing Intern). Coordination / data / documentation-led. |
+| `dji.html` | Application page tailored for the **[DJI] Marketing Intern** posting at **OPPO Việt Nam** (Marketing-Brand). Script / creative / POSM-led. |
+| `oppo-internal.html` | Application page tailored for the **[HO - HCM] Internal Communication Intern** posting at **OPPO Việt Nam** (Marketing-Brand). Programme / publication / data-led. |
 | `projects/*.html` | One detail page per project. |
 
-The two application pages are **not linked from `index.html`** on purpose — each company should only ever
-see the page written for them. Send the direct link. Both carry `<meta name="robots" content="noindex">`
+`dji.html` and `oppo-internal.html` are two different postings at the **same employer** — both are listed on
+`vieclam.vinhkhangmobile.vn` and both route to the same OPPO Việt Nam recruitment desk (08.39.202.555 nhánh 111,
+Lầu 16 Tòa nhà UOA). Unlike ADIFY and Highlands, one reader may well see both, so the two pages are written to be
+consistent with each other: the same facts and the same numbers, weighted differently.
+
+The four application pages are **not linked from `index.html`** on purpose — each company should only ever
+see the page written for them. Send the direct link. All four carry `<meta name="robots" content="noindex">`
 so they stay out of search results.
 
 ## CVs
 
-Three one-page CVs, all generated from HTML source so they stay editable:
+Five one-page CVs, all generated from HTML source so they stay editable:
 
 | Source | Output |
 | --- | --- |
 | `cv/cv-master.html` | `assets/VAN_THI_THU_HUONG_CV.pdf` — general |
 | `cv/cv-adify.html` | `assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf` |
 | `cv/cv-highlands.html` | `assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf` |
+| `cv/cv-dji.html` | `assets/VAN_THI_THU_HUONG_CV_DJI.pdf` |
+| `cv/cv-oppo-internal.html` | `assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf` |
 
-All three share `cv/cv.css`, which is a rebuild of the Canva **"Resume - A4"** template measured from
+All five share `cv/cv.css`, which is a rebuild of the Canva **"Resume - A4"** template measured from
 the exported PDF — photo at x=61pt, 24pt name block at x=244.7pt, rules at y=135 and y=207 framing the
-summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one place changes all three.
+summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one place changes all five.
 
 `cv/fonts/` holds **Noto Serif** (latin + vietnamese subsets, ~130 KB), self-hosted so the PDF renders
 identically offline and inside headless Edge. The Canva original used PT Serif, which has no Vietnamese
@@ -37,7 +46,7 @@ subset — that is why `Ị` and `ƯƠ` in the name fell back to a sans-serif mi
 
 ### The CV photo
 
-All three CVs use `assets/avaTH-cv.png`, the portrait exported from page 11 of the Canva deck. The export
+All five CVs use `assets/avaTH-cv.png`, the portrait exported from page 11 of the Canva deck. The export
 arrives as 490×733 with a 2 px frame drawn around the page; that frame is cropped off and the image is then
 cut to **486×525**, the exact aspect of the photo box in `cv.css` (118.6pt × 128pt), with roughly 10% headroom
 above the hairline. Keeping the file at that aspect means `object-fit: cover` has nothing left to crop, so the
@@ -89,8 +98,9 @@ To confirm the links survived a re-render:
 python -c "import pdfplumber;p=pdfplumber.open('assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf');print(len(p.pages[0].hyperlinks),'links')"
 ```
 
-Expect **12 on the general CV, 10 on the ADIFY one, 10 on the Highlands one** (a title that wraps onto two
-lines produces two annotations, which is why the count moves when wording changes length).
+Expect **12 on the general CV, 10 on the ADIFY one, 10 on the Highlands one, 12 on the DJI one and 11 on the
+OPPO internal-comms one** (a title that wraps onto two lines produces two annotations, which is why the count
+moves when wording changes length).
 
 ## Running locally
 
@@ -105,6 +115,7 @@ server is closer to how GitHub Pages behaves.
 
 ```
 index.html            adify.html      highlands.html
+                      dji.html        oppo-internal.html
 styles.css            app.js          # shared styles + shared behaviour
 cv/                   # CV sources (HTML) + shared print stylesheet
 projects/             # project detail pages
@@ -113,10 +124,11 @@ tools/                # one-off asset scripts (portrait cut-out)
 ```
 
 `styles.css` is themed with CSS custom properties. A page picks its accent colour with
-`<body data-accent="adify">` or `<body data-accent="highlands">`; with no attribute it uses the
-default blue/violet.
+`<body data-accent="...">` — `adify` (periwinkle/violet), `highlands` (orange/coral), `dji` (lime/emerald) or
+`oppo` (fuchsia/violet); with no attribute it uses the default blue/violet. Each theme sets `--accent`,
+`--accent2`, `--accent-ink` and the three ambient `--glow*` values together, so adding one means adding all six.
 
-`app.js` is shared by `index.html`, the two application pages and the Slow North project page —
+`app.js` is shared by `index.html`, the four application pages and the Slow North project page —
 scroll progress bar, image lightbox, reveal-on-scroll, nav highlighting. The older project pages
 still carry their own inline scripts.
 
@@ -166,36 +178,59 @@ python -c "import pypdfium2 as p;d=p.PdfDocument('in.pdf');i=[d[n].render(scale=
 ## Branches
 
 `main` is the working branch and **the only branch GitHub Pages publishes** (source: `main` → `/`, confirmed
-via `gh api repos/<owner>/portfolio/pages`). `apply/adify` and `apply/highlands` are *archive* branches: each
-holds the pack sent to one company, with the other company's page, CV source and CV PDF removed. They are a
-record of what was sent, **not separate deployments** — a branch has no URL of its own.
+via `gh api repos/<owner>/portfolio/pages`). `apply/adify`, `apply/highlands`, `apply/dji` and
+`apply/oppo-internal` are *archive* branches: each holds the pack sent to one employer, with **every other
+pack's** page, CV source and CV PDF removed. They are a record of what was sent, **not separate deployments** —
+a branch has no URL of its own.
 
-That means the live site serves both application pages, and a reader who edits `adify.html` to
-`highlands.html` in the address bar reaches the other one. What protects them is that neither page is linked
-from `index.html` and both carry `<meta name="robots" content="noindex">`, so they stay out of search results
-and off the site's own navigation. If genuine isolation is ever needed, the two packs have to live in separate
-repositories with their own Pages sites — one repo cannot publish two branches.
+That means the live site serves all four application pages, and a reader who edits `adify.html` to
+`dji.html` in the address bar reaches another one. What protects them is that no page is linked from
+`index.html` and all four carry `<meta name="robots" content="noindex">`, so they stay out of search results
+and off the site's own navigation. If genuine isolation is ever needed, the packs have to live in separate
+repositories with their own Pages sites — one repo cannot publish four branches.
+
+Each pack is three files, so each archive branch removes the nine files belonging to the other three:
+
+| Pack | Branch | Keeps |
+| --- | --- | --- |
+| ADIFY | `apply/adify` | `adify.html`, `cv/cv-adify.html`, `assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf` |
+| Highlands | `apply/highlands` | `highlands.html`, `cv/cv-highlands.html`, `assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf` |
+| DJI | `apply/dji` | `dji.html`, `cv/cv-dji.html`, `assets/VAN_THI_THU_HUONG_CV_DJI.pdf` |
+| OPPO internal comms | `apply/oppo-internal` | `oppo-internal.html`, `cv/cv-oppo-internal.html`, `assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf` |
 
 To refresh a pack after work lands on `main`:
 
 ```bash
-git checkout apply/adify && git merge main
+git checkout apply/dji && git merge main
 ```
 
-The three removed files come back as `modify/delete` conflicts every time, which is the merge asking
-whether the removal still stands. It does — `git rm` them again and commit:
+The removed files come back as `modify/delete` conflicts every time, which is the merge asking whether the
+removal still stands. It does — `git rm` them again and commit. On `apply/dji` that is:
 
 ```bash
-git rm highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf
+git rm adify.html cv/cv-adify.html assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf oppo-internal.html cv/cv-oppo-internal.html assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf
 ```
 
-On `apply/highlands` the mirror image: `adify.html`, `cv/cv-adify.html`,
-`assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf`.
+and on the other three the same list with that branch's own pack left out. Note that `apply/adify` and
+`apply/highlands` were cut when only two packs existed — merging `main` into either one now will pull the DJI
+and OPPO files in for the first time, so those two removals have to be added on the next refresh.
 
 ### Writing against a posting
 
-Both application pages carry a **"Against the posting"** section that walks the job description in its
+Every application page carries an **"Against the posting"** section that walks the job description in its
 own order and its own words, with the evidence under each item — ADIFY's 50/20/15/15 split of the role,
-Highlands' nine responsibilities grouped into four. When a posting asks for something that is not there,
-the page says so plainly (the TikTok paid-spend gap on the ADIFY page). A claimed strength a recruiter
-disproves in the interview costs more than the gap it covered.
+Highlands' nine responsibilities grouped into four, and six cards each on the two OPPO pages, one per line of
+the mô tả công việc. The two OPPO pages quote the posting's Vietnamese verbatim in the card subtitle, so it is
+obvious which line is being answered.
+
+The rule on gaps: **never claim what is not there, but do not volunteer a weakness either.** A claimed strength
+a recruiter disproves in the interview costs more than the gap it covered — and an unprompted confession costs
+more than staying quiet. Two live cases:
+
+- The DJI posting makes a foreign language mandatory but accepts either one: *"Tiếng Trung tốt … **hoặc** Tiếng
+  Anh đọc hiểu & dịch thuật tài liệu chuẩn xác."* She has no Chinese, so the page answers the English branch and
+  answers it hard — eighteen months of EN↔VI translation, a webinar written and delivered in English, IELTS 5.5 —
+  and says nothing about Chinese in either direction.
+- The internal-comms posting requires Canva ("thành thạo") and treats Photoshop/Illustrator as *"một lợi thế"*.
+  She has Canva and CapCut only, so the page leans on Canva as daily production work and simply does not raise
+  the other two.
