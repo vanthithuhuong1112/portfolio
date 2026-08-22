@@ -683,8 +683,11 @@ video {
 
 .modal-panel {
   position: relative;
-  width: min(920px, calc(100vw - 32px));
-  /* rộng hơn để xem ảnh poster */
+  /* Shrink to the image rather than stretching every image to 920px: the
+     avatar is 486px wide and was being blown up to twice its resolution. Wide
+     posters still get the full 920px because the image caps there, not here. */
+  width: fit-content;
+  max-width: min(920px, calc(100vw - 32px));
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, .16);
   background: rgba(20, 24, 34, .85);
@@ -697,8 +700,11 @@ video {
 }
 
 .modal-img {
-  width: 100%;
+  /* Never upscale past the file's own pixels, and never run off the screen. */
+  width: auto;
   height: auto;
+  max-width: min(920px, calc(100vw - 32px));
+  max-height: min(80vh, 760px);
   display: block;
 }
 
@@ -910,6 +916,18 @@ video {
   padding-top: 10px;
 }
 
+/* When a card ends in a document row, that row is what should sit on the floor
+   of the card — otherwise the buttons ride on top of a tag block whose height
+   varies with how many tags wrapped, and no two cards in a row line up. */
+.grid-projects .tag-row:not(:last-child) {
+  margin-top: 10px;
+}
+
+.grid-projects .project > .cta:last-child {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
 
 
 /* =========================
@@ -923,6 +941,19 @@ video {
 /* Hero riêng cho project detail */
 .project-detail-page .hero {
   padding: 34px 0 18px;
+}
+
+/* The summary sidebar is what usually sets the height of the hero. When the
+   left card has less to say than the sidebar lists, centre its content instead
+   of leaving a slab of dead space under the buttons. The eyebrow pill has to be
+   pulled back to its own width because a grid item stretches by default. */
+.project-detail-page .hero-main {
+  display: grid;
+  align-content: center;
+}
+
+.project-detail-page .hero-main > .pill {
+  justify-self: start;
 }
 
 .project-detail-page .hero-grid {
@@ -1935,6 +1966,22 @@ body:has(.cta-bar) .to-top {
   color: #fff;
 }
 
+/* Links in a hero sidebar row (e.g. the "Documents" row) need the same
+   underline as body links, or they read as plain text. */
+.kv .v a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .28);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.kv .v a:hover,
+.kv .v a:focus-visible {
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
+
 /* Links inside list copy (e.g. the "Quick Links" block on a project page) */
 .block li a:not(.btn) {
   text-decoration: underline;
@@ -1948,4 +1995,71 @@ body:has(.cta-bar) .to-top {
 .block li a:not(.btn):focus-visible {
   text-decoration-color: var(--accent);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   Data tables — statistical results on the research project pages.
+   Wrapped in .table-wrap so a wide table scrolls inside its own box instead of
+   pushing the page sideways on a phone.
+   ------------------------------------------------------------------------- */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 6px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 640px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 9px 12px;
+  text-align: right;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+  text-align: left;
+  white-space: normal;
+}
+
+.data-table thead th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  border-bottom-color: rgba(255, 255, 255, .22);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Two-column tables sit inside a half-width card, so they wrap rather than scroll. */
+.data-table.compact {
+  min-width: 0;
+}
+
+.data-table.compact th,
+.data-table.compact td {
+  white-space: normal;
+}
+
+.data-table tbody tr.is-outcome td {
+  color: var(--muted);
+}
+
+.data-table caption {
+  caption-side: bottom;
+  color: var(--muted);
+  font-size: 13px;
+  text-align: left;
+  padding-top: 10px;
 }
