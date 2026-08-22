@@ -43,10 +43,16 @@ cut to **486×525**, the exact aspect of the photo box in `cv.css` (118.6pt × 1
 above the hairline. Keeping the file at that aspect means `object-fit: cover` has nothing left to crop, so the
 framing in the PDF is whatever you see in the file. At 486 px wide it also lands close to 300 dpi at print size.
 
-The site uses the same portrait, cropped differently: `assets/avaTH-portrait.png` is a **486×486** square cut
-from the same export, sized for the 128×128 rounded avatar in the hero and for the lightbox behind it. Two crops
+The site uses the same portrait, cropped differently and **cut out**: `assets/avaTH-portrait.png` is a
+**486×486 transparent PNG** for the 128×128 rounded avatar in the hero and the lightbox behind it. Two crops
 rather than one file because the CV box is nearly square while the hero is exactly square, and letting CSS crop a
 tall portrait into either one clipped the top of the head.
+
+The cut-out is generated, not hand-masked — `tools/cutout-portrait.py` rebuilds it from the export: the Canva export sits on a
+perfectly uniform `#FFFFFF` field, so a flood fill seeded from the border removes the background without touching
+the highlights on skin or the near-white sweater (211–219, far enough from 255). The matte is eroded a pixel
+before a 0.8px blur, otherwise the white the export anti-aliased into the hair survives as a bright fringe on the
+dark page. The CV keeps the white background — a framed photo is what the template expects.
 
 `assets/avaTH.png` (and the high-resolution `assets/avaTH1.jpg`) are the previous portrait, kept but no longer
 referenced.
@@ -103,6 +109,7 @@ styles.css            app.js          # shared styles + shared behaviour
 cv/                   # CV sources (HTML) + shared print stylesheet
 projects/             # project detail pages
 assets/               # CV PDFs, project PDFs, images, video
+tools/                # one-off asset scripts (portrait cut-out)
 ```
 
 `styles.css` is themed with CSS custom properties. A page picks its accent colour with
