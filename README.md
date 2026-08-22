@@ -211,9 +211,9 @@ removal still stands. It does — `git rm` them again and commit. On `apply/dji`
 git rm adify.html cv/cv-adify.html assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf oppo-internal.html cv/cv-oppo-internal.html assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf
 ```
 
-and on the other three the same list with that branch's own pack left out. Note that `apply/adify` and
-`apply/highlands` were cut when only two packs existed — merging `main` into either one now will pull the DJI
-and OPPO files in for the first time, so those two removals have to be added on the next refresh.
+and on the other three the same list with that branch's own pack left out. All four branches have been
+refreshed against `main` at least once since the fourth pack existed, so the nine-file list above is now the
+same on every one of them — there is no longer a branch that has never seen the others.
 
 ### Writing against a posting
 
