@@ -253,3 +253,19 @@ p {
   orphans: 1;
   widows: 1;
 }
+
+/* ---------- Links ----------
+   The contact rows and the project titles are real links so the exported
+   PDF carries clickable annotations, as the Canva original did. A hairline
+   underline is the only signal that they are clickable on paper. */
+.contact a,
+.role a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: .4pt;
+  text-underline-offset: 1.6pt;
+}
+
+.contact a.plain {
+  text-decoration: none;
+}

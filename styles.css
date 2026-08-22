@@ -1869,3 +1869,83 @@ body:has(.cta-bar) .to-top {
     transform: none;
   }
 }
+
+/* =========================================================
+   UI v5 — link affordance
+   Project titles and contact rows are links but were rendered with
+   text-decoration:none, so on a touch device (no hover) nothing showed
+   they could be tapped. Both now carry a permanent faint underline that
+   firms up on hover/focus.
+   ========================================================= */
+
+.p-link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.p-link:hover,
+.p-link:focus-visible {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
+
+.kv .v a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .24);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.kv .v a:hover,
+.kv .v a:focus-visible {
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
+
+.footer a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .24);
+}
+
+.footer a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Inline links inside body copy — the contact block writes email, phone and
+   LinkedIn as running text, so they need the same underline as everywhere else. */
+.block p a:not(.btn),
+.summary a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .24);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.block p a:not(.btn):hover,
+.block p a:not(.btn):focus-visible {
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
+
+/* Links inside list copy (e.g. the "Quick Links" block on a project page) */
+.block li a:not(.btn) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .24);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.block li a:not(.btn):hover,
+.block li a:not(.btn):focus-visible {
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
