@@ -41,6 +41,24 @@ body[data-accent="highlands"] {
   --glow3: rgba(212, 163, 115, .10);
 }
 
+body[data-accent="dji"] {
+  --accent: #a3e635;
+  --accent2: #34d399;
+  --accent-ink: #0b1503;
+  --glow1: rgba(163, 230, 53, .18);
+  --glow2: rgba(52, 211, 153, .17);
+  --glow3: rgba(132, 204, 22, .10);
+}
+
+body[data-accent="oppo"] {
+  --accent: #e879f9;
+  --accent2: #a78bfa;
+  --accent-ink: #1a0620;
+  --glow1: rgba(232, 121, 249, .19);
+  --glow2: rgba(167, 139, 250, .17);
+  --glow3: rgba(217, 70, 239, .10);
+}
+
 * {
   box-sizing: border-box;
 }
