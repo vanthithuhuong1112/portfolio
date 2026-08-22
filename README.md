@@ -113,6 +113,16 @@ default blue/violet.
 scroll progress bar, image lightbox, reveal-on-scroll, nav highlighting. The older project pages
 still carry their own inline scripts.
 
+Two layout rules are worth knowing before editing a card or a hero:
+
+- A project card ends with `<div class="cta">` holding its document button, and the stylesheet pins
+  **that** row to the floor of the card (`.grid-projects .project > .cta:last-child`). Tags keep the
+  old `margin-top: auto` only when they are the last thing in the card. Do not add an inline
+  `margin-top` to a card CTA — it beats the rule and the buttons stop lining up across a row.
+- `.project-detail-page .hero-main` is a grid with `align-content: center`, because the summary
+  sidebar next to it is usually the taller of the two. Any direct child that should keep its natural
+  width — currently the eyebrow pill — needs `justify-self: start`, since grid items stretch.
+
 ## Project documents
 
 Every project claim that can be checked links to the document behind it. The PDFs live in `assets/` and are

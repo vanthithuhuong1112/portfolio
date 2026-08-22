@@ -910,6 +910,18 @@ video {
   padding-top: 10px;
 }
 
+/* When a card ends in a document row, that row is what should sit on the floor
+   of the card — otherwise the buttons ride on top of a tag block whose height
+   varies with how many tags wrapped, and no two cards in a row line up. */
+.grid-projects .tag-row:not(:last-child) {
+  margin-top: 10px;
+}
+
+.grid-projects .project > .cta:last-child {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
 
 
 /* =========================
@@ -923,6 +935,19 @@ video {
 /* Hero riêng cho project detail */
 .project-detail-page .hero {
   padding: 34px 0 18px;
+}
+
+/* The summary sidebar is what usually sets the height of the hero. When the
+   left card has less to say than the sidebar lists, centre its content instead
+   of leaving a slab of dead space under the buttons. The eyebrow pill has to be
+   pulled back to its own width because a grid item stretches by default. */
+.project-detail-page .hero-main {
+  display: grid;
+  align-content: center;
+}
+
+.project-detail-page .hero-main > .pill {
+  justify-self: start;
 }
 
 .project-detail-page .hero-grid {
@@ -1931,6 +1956,22 @@ body:has(.cta-bar) .to-top {
 
 .block p a:not(.btn):hover,
 .block p a:not(.btn):focus-visible {
+  text-decoration-color: var(--accent);
+  color: #fff;
+}
+
+/* Links in a hero sidebar row (e.g. the "Documents" row) need the same
+   underline as body links, or they read as plain text. */
+.kv .v a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(255, 255, 255, .28);
+  transition: text-decoration-color .18s ease, color .18s ease;
+}
+
+.kv .v a:hover,
+.kv .v a:focus-visible {
   text-decoration-color: var(--accent);
   color: #fff;
 }
