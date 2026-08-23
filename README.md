@@ -26,7 +26,7 @@ so they stay out of search results.
 
 ## CVs
 
-Five one-page CVs, all generated from HTML source so they stay editable:
+Six one-page CVs, all generated from HTML source so they stay editable:
 
 | Source | Output |
 | --- | --- |
@@ -35,10 +35,17 @@ Five one-page CVs, all generated from HTML source so they stay editable:
 | `cv/cv-highlands.html` | `assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf` |
 | `cv/cv-dji.html` | `assets/VAN_THI_THU_HUONG_CV_DJI.pdf` |
 | `cv/cv-oppo-internal.html` | `assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf` |
+| `cv/cv-hoatuc.html` | `assets/VAN_THI_THU_HUONG_CV_HOATUC.pdf` |
 
-All five share `cv/cv.css`, which is a rebuild of the Canva **"Resume - A4"** template measured from
+The Hoa Túc one is **a CV on its own** — no application page, no archive branch. It answers the Admin posting at
+**Hoa Túc Cooking Class** (74/7 Hai Bà Trưng, Q1), which is applied for by emailing a CV to `cookingclass@hoatuc.com`,
+so there is nothing for a tailored page to be linked from. It also carries only **two** projects rather than five or
+six: the posting is front-desk and booking work, so the Slow North registration funnel and the TopCV event
+administration are the only two that answer it, and the space goes to the customer-facing bullets instead.
+
+All six share `cv/cv.css`, which is a rebuild of the Canva **"Resume - A4"** template measured from
 the exported PDF — photo at x=61pt, 24pt name block at x=244.7pt, rules at y=135 and y=207 framing the
-summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one place changes all five.
+summary, then a 163.8pt / 362.3pt two-column body. Editing the layout in one place changes all six.
 
 `cv/fonts/` holds **Noto Serif** (latin + vietnamese subsets, ~130 KB), self-hosted so the PDF renders
 identically offline and inside headless Edge. The Canva original used PT Serif, which has no Vietnamese
@@ -46,7 +53,7 @@ subset — that is why `Ị` and `ƯƠ` in the name fell back to a sans-serif mi
 
 ### The CV photo
 
-All five CVs use `assets/avaTH-cv.png`, the portrait exported from page 11 of the Canva deck. The export
+All six CVs use `assets/avaTH-cv.png`, the portrait exported from page 11 of the Canva deck. The export
 arrives as 490×733 with a 2 px frame drawn around the page; that frame is cropped off and the image is then
 cut to **486×525**, the exact aspect of the photo box in `cv.css` (118.6pt × 128pt), with roughly 10% headroom
 above the hairline. Keeping the file at that aspect means `object-fit: cover` has nothing left to crop, so the
@@ -98,9 +105,9 @@ To confirm the links survived a re-render:
 python -c "import pdfplumber;p=pdfplumber.open('assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf');print(len(p.pages[0].hyperlinks),'links')"
 ```
 
-Expect **12 on the general CV, 10 on the ADIFY one, 10 on the Highlands one, 12 on the DJI one and 11 on the
-OPPO internal-comms one** (a title that wraps onto two lines produces two annotations, which is why the count
-moves when wording changes length).
+Expect **12 on the general CV, 10 on the ADIFY one, 10 on the Highlands one, 12 on the DJI one, 11 on the
+OPPO internal-comms one and 8 on the Hoa Túc one** (a title that wraps onto two lines produces two annotations,
+which is why the count moves when wording changes length).
 
 ## Running locally
 
@@ -120,7 +127,7 @@ styles.css            app.js          # shared styles + shared behaviour
 cv/                   # CV sources (HTML) + shared print stylesheet
 projects/             # project detail pages
 assets/               # CV PDFs, project PDFs, images, video
-tools/                # one-off asset scripts (portrait cut-out)
+tools/                # one-off asset scripts (portrait cut-out, Canva PDF shrink)
 ```
 
 `styles.css` is themed with CSS custom properties. A page picks its accent colour with
@@ -154,15 +161,28 @@ carries that project:
 | `assets/hoi-an-destination-choice-deck.pdf` | Hoi An research — 12-page summary deck (context, method, reliability table, β/f² ranking, recommendations, Q1–Q4 roadmap). Sits **alongside** the full thesis, not instead of it. |
 | `assets/graduation-project-hoi-an.pdf` | Hoi An research — the full 64-page thesis. |
 | `assets/business-research.pdf` | TikTok livestream purchase-intention study. |
-| `assets/topcv-labor-market-report.pdf` | TopCV × UFM hybrid event. |
+| `assets/topcv-labor-market-report.pdf` | TopCV × UFM hybrid event — the 12-slide event report (description, programme, work breakdown, promotion, participation and budget results, satisfaction survey, self-evaluation). |
 
-Numbers quoted on the Slow North and Hoi An pages come straight from those files — 17 registrations,
+Numbers quoted on the Slow North, Hoi An and TopCV pages come straight from those files — 17 registrations,
 15 attendees, 13 survey responses (77% extremely satisfied, 92% would return); 433 responses, R² 0.828,
-β 0.297 for social influence. If a document is replaced, re-check the page against it.
+β 0.297 for social influence; **212 registrations, 149 attendees** and actual cost 29% under plan. If a document is
+replaced, re-check the page against it.
 
-One known discrepancy: the summary deck labels its outcome construct row "Tourism infrastructure (TI)"
-while TI is defined earlier in the same deck as *Travel Choice Intention*. The site table uses the correct
-label; the deck itself is still worth fixing in Canva.
+That last set is why the site no longer says "~200 attendees" anywhere. Both the old written report and the deck
+that replaced it record 212 registrations against a venue planned for 100, of which 149 people actually came, so a
+reader who opened the linked file saw a number that did not match the page. The stat tiles now read **149, "of 212
+registered"**.
+
+Two known discrepancies, both inside a document rather than between the document and the site:
+
+- The Hoi An summary deck labels its outcome construct row "Tourism infrastructure (TI)" while TI is defined
+  earlier in the same deck as *Travel Choice Intention*. The site table uses the correct label.
+- The TopCV event report says **120 attendees** on the "Event description" slide and **149 actual participant**
+  on the "Evaluation" slide. 149 is the figure the written report supports ("the number of registrations for
+  attendance reached 212, but in fact only 149 people attended"), so 149 is what the site and the CVs use — the
+  120 on the description slide is the one that is wrong.
+
+Both are still worth fixing in Canva.
 
 ### Why the webinar report is a re-render
 
@@ -173,6 +193,34 @@ ever re-exported, run the same pass rather than committing the raw 6 MB file:
 
 ```bash
 python -c "import pypdfium2 as p;d=p.PdfDocument('in.pdf');i=[d[n].render(scale=120/72).to_pil().convert('RGB') for n in range(len(d))];i[0].save('out.pdf',save_all=True,append_images=i[1:],resolution=120,quality=68,optimize=True)"
+```
+
+### Why the TopCV deck is re-compressed
+
+The event report as exported from Canva is **90.9 MB for 12 slides**, and almost none of that is content: Canva
+writes the same two background images — a 2585×1041 RGB and its 2218×1519 alpha mask — as a *fresh pair of objects
+on every slide*, uncompressed, which is 67 MB of the file on its own. `tools/shrink-canva-pdf.py` merges
+byte-identical image objects and re-encodes the plain 8-bit images as JPEG (quality 68, the same as the webinar
+pass). The stored file is **5.1 MB**, an 18× reduction, with the text layer byte-identical and every page within
+JPEG noise of the original (mean difference under 1/255):
+
+```bash
+python tools/shrink-canva-pdf.py "in.pdf" assets/topcv-labor-market-report.pdf 68 72
+```
+
+It needs `pikepdf` and `Pillow`. Two rules are load-bearing and the script enforces them:
+
+- **Never re-encode a `/ImageMask`.** Canva draws its brush illustrations as 1-bit stencils painted with a fill
+  colour. Turning one into an 8-bit JPEG leaves `/ImageMask true` in place, the renderer floods the whole shape
+  with the current fill, and the illustration comes out as a solid brown silhouette.
+- **Merge on the whole image dictionary, not just the pixel bytes.** Two images can share a stream and differ in
+  their `/SMask` or `/ColorSpace`; merging on the stream alone hands one of them the other's transparency.
+
+Check any re-run the same way it was checked the first time — render both files page by page and compare, rather
+than trusting the file size:
+
+```bash
+python -c "import pypdfium2 as p,numpy as np;from PIL import ImageChops;a=p.PdfDocument('in.pdf');b=p.PdfDocument('out.pdf');print([round(float(np.asarray(ImageChops.difference(a[n].render(scale=1).to_pil().convert('RGB'),b[n].render(scale=1).to_pil().convert('RGB')),np.float32).mean()),2) for n in range(len(a))])"
 ```
 
 ## Branches
@@ -189,7 +237,8 @@ That means the live site serves all four application pages, and a reader who edi
 and off the site's own navigation. If genuine isolation is ever needed, the packs have to live in separate
 repositories with their own Pages sites — one repo cannot publish four branches.
 
-Each pack is three files, so each archive branch removes the nine files belonging to the other three:
+Each pack is three files, so each archive branch removes the nine files belonging to the other three — plus the
+two Hoa Túc files, which belong to no pack at all:
 
 | Pack | Branch | Keeps |
 | --- | --- | --- |
@@ -208,12 +257,14 @@ The removed files come back as `modify/delete` conflicts every time, which is th
 removal still stands. It does — `git rm` them again and commit. On `apply/dji` that is:
 
 ```bash
-git rm adify.html cv/cv-adify.html assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf oppo-internal.html cv/cv-oppo-internal.html assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf
+git rm adify.html cv/cv-adify.html assets/VAN_THI_THU_HUONG_CV_ADIFY.pdf highlands.html cv/cv-highlands.html assets/VAN_THI_THU_HUONG_CV_HIGHLANDS.pdf oppo-internal.html cv/cv-oppo-internal.html assets/VAN_THI_THU_HUONG_CV_OPPO_INTERNAL.pdf cv/cv-hoatuc.html assets/VAN_THI_THU_HUONG_CV_HOATUC.pdf
 ```
 
 and on the other three the same list with that branch's own pack left out. All four branches have been
 refreshed against `main` at least once since the fourth pack existed, so the nine-file list above is now the
-same on every one of them — there is no longer a branch that has never seen the others.
+same on every one of them — there is no longer a branch that has never seen the others. The two Hoa Túc files at
+the end are new and have never been on an archive branch; the first refresh after they landed is the one that has
+to remove them.
 
 ### Writing against a posting
 
