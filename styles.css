@@ -1323,6 +1323,36 @@ video {
   }
 }
 
+/* A five-card row when a page has five figures worth showing. Two columns on a
+   narrow screen leaves the fifth card alone, so it takes the full row. */
+.stats.five {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1040px) {
+  .stats.five {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats.five .stat:nth-child(4) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 860px) {
+  .stats.five {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats.five .stat:nth-child(4) {
+    grid-column: auto;
+  }
+
+  .stats.five .stat:nth-child(5) {
+    grid-column: span 2;
+  }
+}
+
 .stat {
   padding: 14px 14px 12px;
   border-radius: 15px;
@@ -1660,6 +1690,11 @@ svg {
 /* ---------- Stats on small screens ---------- */
 @media (max-width: 620px) {
   .stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stats.five {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
